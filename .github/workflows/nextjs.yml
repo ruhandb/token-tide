@@ -30,7 +30,6 @@ jobs:
   build:
     defaults:
       run:
-        shell: bash
         working-directory: ./token-tide-ui
     runs-on: ubuntu-latest
     steps:
