@@ -17,6 +17,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+defaults:
+  run:
+    shell: bash
+    working-directory: ./token-tide-ui
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -34,9 +38,9 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/token-tide-ui/package.json" ]; then
+          if [ -f "${{ github.workspace }}/package.json" ]; then
             echo "uifolder=token-tide-ui" >> $GITHUB_OUTPUT
-            echo "manager=token-tide-ui/npm" >> $GITHUB_OUTPUT
+            echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
             exit 0
