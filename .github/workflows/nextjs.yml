@@ -38,7 +38,7 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/package.json" ]; then
+          if [ -f "${{ github.workspace }}/token-tide-ui/package.json" ]; then
             echo "uifolder=token-tide-ui" >> $GITHUB_OUTPUT
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
