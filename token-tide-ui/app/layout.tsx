@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import SimpleBottomNavigation from "./components/SimpleBottomNavigation";
 import { Box, Container, CssBaseline } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,9 +26,11 @@ export default function RootLayout({
             <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} >
               {children}
             </Box>
+          <SimpleBottomNavigation />
           </Container>
         </>
       </body>
     </html>
   );
 }
+
