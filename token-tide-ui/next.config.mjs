@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    assetPrefix: '/token-tide'
+    assetPrefix: process.env.ASSET_PREFIX
 };
 
 export default nextConfig;
