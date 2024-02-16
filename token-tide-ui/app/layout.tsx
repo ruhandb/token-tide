@@ -3,7 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import SimpleBottomNavigation from "./components/SimpleBottomNavigation";
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
+import ResponsiveAppBar from "./components/responsiveAppBar";
+import CustomTheme from "./components/CustomTheme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,15 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" >
+      <body className={inter.className} style={{ "background": "#fbf6f3" }}>
         <>
           <CssBaseline />
+          <CustomTheme>
+            <ResponsiveAppBar />
+          </CustomTheme>
           <Container fixed>
-            <Box sx={{ bgcolor: '#cfe8fc', height: '100vh' }} >
+            <Box sx={{ height: '100vh' }} >
               {children}
             </Box>
-          <SimpleBottomNavigation />
           </Container>
         </>
       </body>

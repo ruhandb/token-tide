@@ -8,30 +8,16 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
-const steps = [
-  {
-    label: 'Select campaign settings',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, StepButton, TextField } from '@mui/material';
 
 export default function ProjectCreationStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [title, setTitle] = React.useState('');
+  const [category, setCategory] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string);
+  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -44,53 +30,195 @@ export default function ProjectCreationStepper() {
   const handleReset = () => {
     setActiveStep(0);
   };
-
   return (
-    <Box sx={{ maxWidth: 400 }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel
-              optional={
-                index === 2 ? (
-                  <Typography variant="caption">Last step</Typography>
-                ) : null
-              }
-            >
-              {step.label}
-            </StepLabel>
-            <StepContent>
-              <Typography>{step.description}</Typography>
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                  </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
+    <Box >
+      <Stepper nonLinear activeStep={activeStep} orientation="vertical">
+        <Step key="title" completed={ title != '' }>
+          <StepButton optional={activeStep === 0 ? null : title} onClick={() => { setActiveStep(0); }} >
+              Título do Projeto
+          </StepButton>
+          <StepContent>
+            <TextField fullWidth id="outlined-basic" variant="standard"
+              value={title}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setTitle(event.target.value);
+              }}
+            />
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="outlined" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
+        <Step key="catregory">
+          <StepLabel optional="Title of your project" >
+            Categoria
+          </StepLabel>
+          <StepContent>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+                <Button disabled={false} onClick={handleBack} sx={{ mt: 1, mr: 1 }} >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
+        <Step key="catregory2">
+          <StepLabel optional="Title of your project" >
+            Categoria
+          </StepLabel>
+          <StepContent>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+                <Button disabled={false} onClick={handleBack} sx={{ mt: 1, mr: 1 }} >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
+        <Step key="catregory22">
+          <StepLabel optional="Title of your project" >
+            Categoria
+          </StepLabel>
+          <StepContent>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+                <Button disabled={false} onClick={handleBack} sx={{ mt: 1, mr: 1 }} >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
+        <Step key="catregory222">
+          <StepLabel optional="Title of your project" >
+            Categoria
+          </StepLabel>
+          <StepContent>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+                <Button disabled={false} onClick={handleBack} sx={{ mt: 1, mr: 1 }} >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
+        <Step key="catregory2222">
+          <StepLabel optional="Title of your project" >
+            Categoria
+          </StepLabel>
+          <StepContent>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={category}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+            <Box sx={{ mb: 2 }}>
+              <div>
+                <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} >
+                  Continue
+                </Button>
+                <Button disabled={false} onClick={handleBack} sx={{ mt: 1, mr: 1 }} >
+                  Back
+                </Button>
+              </div>
+            </Box>
+          </StepContent>
+        </Step>
       </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </Box>
+      {
+        activeStep === 2 && (
+          <Paper square elevation={0} sx={{ p: 3 }}>
+            <Typography>All steps completed - you&apos;re finished</Typography>
+            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+              Reset
+            </Button>
+          </Paper>
+        )
+      }
+    </Box >
   );
 }
