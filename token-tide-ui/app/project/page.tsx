@@ -24,8 +24,6 @@ export default function FixedContainer() {
         </Grid>
       </Grid>
     </CustomTheme>
-
-
     </>
   );
 }

@@ -61,7 +61,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            Token Tide
+            Onda
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -101,7 +101,7 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-            <Image alt="Token Tide" width={48} height={48} src={LogoIcon} />
+            <Image alt="Onda" width={48} height={48} src={LogoIcon} />
           </Box>
           <Typography
             variant="h5"
@@ -119,7 +119,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            Token Tide
+            Onda
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
