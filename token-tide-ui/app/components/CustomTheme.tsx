@@ -4,12 +4,27 @@ import { ThemeProvider, createTheme } from "@mui/material";
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#168e9a',
+            main: '#0495a6',
         },
         secondary: {
             main: '#fcaa68',
         },
     },
+    components: {
+        // Name of the component
+        MuiAppBar: {
+          styleOverrides: {
+            // Name of the slot
+            root: {
+              // Some CSS
+              backgroundColor: '#e0f7fa',
+              color: "rgba(0, 0, 0, 0.87)",
+              boxShadow: "none",
+              borderBottom: "1px solid rgba(0, 0, 0, 0.12)"
+            },
+          },
+        },
+      },
 });
 
 export default function CustomTheme({

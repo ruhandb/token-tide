@@ -16,7 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import LogoIcon from '../assets/logo.svg';
 import Image from 'next/image';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Tides', 'Portifolio', 'WhitePaper'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -126,7 +126,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, display: 'block' }}
               >
                 {page}
               </Button>
