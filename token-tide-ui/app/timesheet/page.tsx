@@ -14,10 +14,10 @@ export default function Page() {
     const [endBreakTime, setEndBreakTime] = React.useState<Dayjs | null>(dayjs().set('h', 14).set('m', 0));
     const [endTime, setEndTime] = React.useState<Dayjs | null>(dayjs().set('h', 17).set('m', 30));
 
-    const [tasksDone, setTaskDone] = React.useState(0);
+    const [tasksDone, setTaskDone] = React.useState(1);
     const [timePerTask, setMinutesPerTask] = React.useState('...');
 
-    const updateStatus = () => {
+    const updateStatus = (tasks: number) => {
         const now = dayjs();
 
         const elapsedSecondsBeforeBreak = now.isBefore(iniBreakTime) || iniBreakTime == null
@@ -26,31 +26,31 @@ export default function Page() {
             ? now.diff(endBreakTime, 's') : endTime.diff(endBreakTime, 's');
 
         const elapsedSeconds = elapsedSecondsBeforeBreak + elapsedSecondsAfterBreak;
-        const secondsPerTask = elapsedSeconds / (tasksDone + 1);
-        console.log(elapsedSeconds, secondsPerTask, tasksDone + 1)
+        const secondsPerTask = elapsedSeconds / tasks;
+        console.log(elapsedSeconds, secondsPerTask, tasks)
         setMinutesPerTask(dayjs().subtract(secondsPerTask, 's').toNow(true));
     }
 
     const setIniTimeHandler = (value: React.SetStateAction<dayjs.Dayjs | null>) => {
         setIniTime(value);
-        updateStatus();
+        updateStatus(tasksDone);
     };
     const setIniBreakTimeHandler = (value: React.SetStateAction<dayjs.Dayjs | null>) => {
         setIniBreakTime(value);
-        updateStatus();
+        updateStatus(tasksDone);
     };
     const setEndBreakTimeHandler = (value: React.SetStateAction<dayjs.Dayjs | null>) => {
         setEndBreakTime(value);
-        updateStatus();
+        updateStatus(tasksDone);
     };
     const setEndTimeHandler = (value: React.SetStateAction<dayjs.Dayjs | null>) => {
         setEndTime(value);
-        updateStatus();
+        updateStatus(tasksDone);
     };
 
     const changeCountTask = (value: number) => {
         setTaskDone(value);
-        updateStatus();
+        updateStatus(value);
     };
     /* useEffect(() => {
         "use client"
@@ -66,11 +66,10 @@ export default function Page() {
                 <Grid item xs={12}>
                     <Paper variant="outlined" sx={{ p: 3 }}>
                     <br />
-                        <TimeField ampm={false} value={iniTime} label="Entrada" onChange={setIniTimeHandler} />
-                        <TimeField ampm={false} value={iniBreakTime} label="Inicio Intervalo" onChange={setIniBreakTimeHandler} /><br />
-                        <br />
-                        <TimeField ampm={false} value={endBreakTime} label="Fim Intervalo" onChange={setEndBreakTimeHandler} />
-                        <TimeField ampm={false} value={endTime} label="Saída" onChange={setEndTimeHandler} />
+                        <TimeField sx={{ m:1 }} ampm={false} value={iniTime} label="Entrada" onChange={setIniTimeHandler} />
+                        <TimeField sx={{ m:1 }} ampm={false} value={iniBreakTime} label="Inicio Intervalo" onChange={setIniBreakTimeHandler} />
+                        <TimeField sx={{ m:1 }} ampm={false} value={endBreakTime} label="Fim Intervalo" onChange={setEndBreakTimeHandler} />
+                        <TimeField sx={{ m:1 }} ampm={false} value={endTime} label="Saída" onChange={setEndTimeHandler} />
                         <br />
                         Total Tarefas: {tasksDone}<br />
                         {timePerTask} por tarefa<br />
