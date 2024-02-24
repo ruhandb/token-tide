@@ -4,7 +4,9 @@ import { Button, Grid, Paper, TextField } from '@mui/material';
 import CustomTheme from '../components/CustomTheme';
 import { TimeField } from '@mui/x-date-pickers/TimeField';
 import dayjs, { Dayjs } from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime'
+import relativeTime from 'dayjs/plugin/relativeTime';
+import ArticleIcon from '@mui/icons-material/Article';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { useEffect } from 'react';
 dayjs.extend(relativeTime)
 
@@ -15,6 +17,8 @@ export default function Page() {
     const [endTime, setEndTime] = React.useState<Dayjs | null>(dayjs().set('h', 17).set('m', 30));
 
     const [tasksDone, setTaskDone] = React.useState(1);
+    const [tasksEstimated, setTasksEstimated] = React.useState(1);
+    const [tasksBar, setTasksBar] = React.useState<boolean[]>([]);
     const [timePerTask, setMinutesPerTask] = React.useState('...');
 
     const updateStatus = (tasks: number) => {
@@ -27,8 +31,18 @@ export default function Page() {
 
         const elapsedSeconds = elapsedSecondsBeforeBreak + elapsedSecondsAfterBreak;
         const secondsPerTask = elapsedSeconds / tasks;
-        console.log(elapsedSeconds, secondsPerTask, tasks)
         setMinutesPerTask(dayjs().subtract(secondsPerTask, 's').toNow(true));
+
+        const _8hoursSeconds = 60 * 60 * 8;
+        const estimatedTasks = Math.round(_8hoursSeconds / secondsPerTask);
+        setTasksEstimated(estimatedTasks);
+
+        const bar: boolean[] = [];
+        for (let index = 0; index < estimatedTasks; index++) {
+            bar.push(index < tasks);
+        }
+        setTasksBar(bar);
+        console.log(bar);
     }
 
     const setIniTimeHandler = (value: React.SetStateAction<dayjs.Dayjs | null>) => {
@@ -65,13 +79,21 @@ export default function Page() {
 
                 <Grid item xs={12}>
                     <Paper variant="outlined" sx={{ p: 3 }}>
-                    <br />
-                        <TimeField sx={{ m:1 }} ampm={false} value={iniTime} label="Entrada" onChange={setIniTimeHandler} />
-                        <TimeField sx={{ m:1 }} ampm={false} value={iniBreakTime} label="Inicio Intervalo" onChange={setIniBreakTimeHandler} />
-                        <TimeField sx={{ m:1 }} ampm={false} value={endBreakTime} label="Fim Intervalo" onChange={setEndBreakTimeHandler} />
-                        <TimeField sx={{ m:1 }} ampm={false} value={endTime} label="Saída" onChange={setEndTimeHandler} />
+                        <br />
+                        <TimeField sx={{ m: 1 }} ampm={false} value={iniTime} label="Entrada" onChange={setIniTimeHandler} />
+                        <TimeField sx={{ m: 1 }} ampm={false} value={iniBreakTime} label="Inicio Intervalo" onChange={setIniBreakTimeHandler} />
+                        <TimeField sx={{ m: 1 }} ampm={false} value={endBreakTime} label="Fim Intervalo" onChange={setEndBreakTimeHandler} />
+                        <TimeField sx={{ m: 1 }} ampm={false} value={endTime} label="Saída" onChange={setEndTimeHandler} />
+                        <br />
+                        {tasksBar.filter(done => done).map((done, idx) => (
+                            <ArticleIcon color="primary" key={idx}></ArticleIcon>
+                        ))}
+                        {tasksBar.filter(done => !done).map((done, idx) => (
+                            <ArticleOutlinedIcon color="secondary" key={idx}></ArticleOutlinedIcon>
+                        ))}
                         <br />
                         Total Tarefas: {tasksDone}<br />
+                        Tarefas Estimadas: {tasksEstimated}<br />
                         {timePerTask} por tarefa<br />
                         <Button variant="contained" onClick={() => {
                             changeCountTask(tasksDone + 1);
