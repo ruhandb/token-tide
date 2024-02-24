@@ -1,7 +1,10 @@
 "use client"
 import { ThemeProvider, createTheme } from "@mui/material";
+import { ptBR } from '@mui/x-date-pickers/locales';
+
 
 const theme = createTheme({
+
     palette: {
         primary: {
             main: '#0495a6',
@@ -24,8 +27,8 @@ const theme = createTheme({
             },
           },
         },
-      },
-});
+      },      
+},  ptBR);
 
 export default function CustomTheme({
     children,

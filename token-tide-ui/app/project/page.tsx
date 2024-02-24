@@ -3,9 +3,8 @@ import ProjectCreationStepper from './projectCreationStepper';
 import { Grid, Paper } from '@mui/material';
 import CustomTheme from '../components/CustomTheme';
 
-export default function FixedContainer() {
+export default function Page() {
   return (
-    <>
     <CustomTheme>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -24,6 +23,5 @@ export default function FixedContainer() {
         </Grid>
       </Grid>
     </CustomTheme>
-    </>
   );
 }

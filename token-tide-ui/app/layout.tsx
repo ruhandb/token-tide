@@ -6,6 +6,7 @@ import SimpleBottomNavigation from "./components/SimpleBottomNavigation";
 import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
 import ResponsiveAppBar from "./components/responsiveAppBar";
 import CustomTheme from "./components/CustomTheme";
+import CustomLocationProvider from "./components/CustomLocationProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,17 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body className={inter.className} style={{ "background": "#e0f7fa" }}>
-        <>
-          <CssBaseline />
-          <CustomTheme>
-            <ResponsiveAppBar />
-          </CustomTheme>
-          <Container fixed>
-            <Box sx={{ height: '100vh' }} >
-              {children}
-            </Box>
-          </Container>
-        </>
+          <CustomLocationProvider>
+            <CssBaseline />
+            <CustomTheme>
+              <ResponsiveAppBar />
+            </CustomTheme>
+            <Container fixed>
+              <Box sx={{ height: '100vh' }} >
+                {children}
+              </Box>
+            </Container>
+          </CustomLocationProvider>
       </body>
     </html>
   );
