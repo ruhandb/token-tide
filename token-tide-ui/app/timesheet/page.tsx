@@ -8,6 +8,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import ArticleIcon from '@mui/icons-material/Article';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { useEffect } from 'react';
+dayjs.locale("ptBR");
 dayjs.extend(relativeTime)
 
 export default function Page() {
@@ -26,10 +27,14 @@ export default function Page() {
 
         const elapsedSecondsBeforeBreak = now.isBefore(iniBreakTime) || iniBreakTime == null
             ? now.diff(iniTime, 's') : iniBreakTime.diff(iniTime, 's');
-        const elapsedSecondsAfterBreak = now.isBefore(endTime) || endTime == null
-            ? now.diff(endBreakTime, 's') : endTime.diff(endBreakTime, 's');
+        const elapsedSecondsAfterBreak = (now.isBefore(endTime) && now.isAfter(endBreakTime))
+            ? now.diff(endBreakTime, 's') 
+            : (now.isBefore(iniBreakTime) || endTime == null ? 0 : endTime.diff(endBreakTime, 's')) ;
+
+        
 
         const elapsedSeconds = elapsedSecondsBeforeBreak + elapsedSecondsAfterBreak;
+        console.log(elapsedSeconds, elapsedSecondsBeforeBreak, elapsedSecondsAfterBreak);
         const secondsPerTask = elapsedSeconds / tasks;
         setMinutesPerTask(dayjs().subtract(secondsPerTask, 's').toNow(true));
 
